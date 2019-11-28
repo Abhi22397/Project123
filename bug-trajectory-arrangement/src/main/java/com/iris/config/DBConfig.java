@@ -26,14 +26,17 @@ public class DBConfig {
 	
 	@Bean(name="dataSource")
 	public DataSource getDataSource(){
+		System.out.println("Hello 1");
 		dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 		dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
 		dataSource.setUsername("hr");
 		dataSource.setPassword("hr");
+		System.out.println("Hello 2");
 		return dataSource;
 	}
 	@Bean(name="sessionFactory")
 	public SessionFactory getSessionFactory() {
+		System.out.println("Hello 3");
 		Properties p=new Properties();
 		p.setProperty("hibernate.dialect","org.hibernate.dialect.OracleDialect");
 		p.setProperty("hibernate.hbm2ddl.auto","update");
@@ -42,13 +45,16 @@ public class DBConfig {
 		sb.addProperties(p);
 		sb.scanPackages("com.iris.models");
 		SessionFactory sf=sb.buildSessionFactory();
+		System.out.println("Hello 4");
 		return sf;
 	}
 	@Bean(name="HibernateTransaction")
 	@Autowired
 	
 	public HibernateTransactionManager geHibernateTransactionManager(SessionFactory sessionFactory){
+		System.out.println("Hello 5");
 		HibernateTransactionManager tx=new HibernateTransactionManager(sessionFactory);
+		System.out.println("Hello 6");
 		return tx;
 	}
 }

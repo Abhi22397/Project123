@@ -10,11 +10,14 @@ import org.springframework.stereotype.Repository;
 import com.iris.daos.ProjectDao;
 import com.iris.models.Project;
 
+import oracle.net.aso.p;
+
 @Repository("projectDao")
 
 public class ProjectDaoImpl implements ProjectDao{
 	@Autowired
      SessionFactory sessionFactory;
+	
 	@Override
 	public List<Project> getAllProjects() {
 		try{
@@ -27,5 +30,28 @@ public class ProjectDaoImpl implements ProjectDao{
 		}
 		return null;
 	}
+	@Override
+	public Project getProjectById(String projectId) {
+		try{
+			Session session=sessionFactory.getCurrentSession();
+		    Project pObj=session.get(Project.class, projectId);
+		    return pObj;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public boolean updateProject(Project pObj) {
+		try{
+			Session session=sessionFactory.getCurrentSession();
+		    session.update(pObj);
+		    return true;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 
 }

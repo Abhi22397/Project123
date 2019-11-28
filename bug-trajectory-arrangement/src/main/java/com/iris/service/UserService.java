@@ -6,8 +6,9 @@ import java.util.List;
 import com.iris.models.User;
 
 public interface UserService {
-	public User validateUser(int id,String password); 
-	public List<User> getAllUserByDesg(String desg);
-
+	public User validateUser(String email,String password); 
+	public List<User> getAllDeveloper();
+	public List<User> getAllTester();
+	public User getUserById(int userId);
 
 }

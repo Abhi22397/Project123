@@ -12,28 +12,43 @@ import com.iris.models.User;
 import com.iris.service.UserService;
 
 
-@Transactional
+
 @Service("userService")
+@Transactional
 public class UserServiceImpl implements UserService{
     @Autowired
    private UserDao userDao;
 	@Override
-	public User validateUser(int id, String password) {
+	public User validateUser(String email, String password) {
 		try {
-			 return userDao.validateUser(id, password);
+			System.out.println(userDao.validateUser(email, password));
+			 return userDao.validateUser(email, password);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	@Override
-	public List<User> getAllUserByDesg(String desg) {
+	public List<User> getAllDeveloper() {
 		try {
-			 return userDao.getAllUserByDesg(desg);
+			 return userDao.getAllDeveloper();
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	@Override
+	public List<User> getAllTester() {
+		try {
+			 return userDao.getAllTester();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public User getUserById(int userId) {
+		return userDao.getUserById(userId);
 	}
 
 }
